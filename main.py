@@ -18,10 +18,13 @@ for im_name in os.listdir(DATA_PATH):
     img, xyposs = process_and_find_trays(img_gray, img)
     groups = predict_groups(radius)
     groups = fix_groups_ids(radius, groups)
-    money_in, money_all = calculate_money(groups, cords, xyposs)
+    money_in, money_all, coins_in, coins_all = calculate_money(groups, cords, xyposs)
 
     cv.putText(img, f"Pieniędzy na tacy jest; {money_in / 100}pln a w sumie na zdjęciu jest: {money_all / 100}pln",
                (0, 30),
+               cv.FONT_HERSHEY_DUPLEX, 3 / 5, (255, 255, 255))
+    cv.putText(img, f"Monet na tacy jest; {coins_in}szt a w sumie na zdjęciu jest: {coins_all}szt",
+               (0, 60),
                cv.FONT_HERSHEY_DUPLEX, 3 / 5, (255, 255, 255))
 
     img = cv.resize(img, [500, 500])
